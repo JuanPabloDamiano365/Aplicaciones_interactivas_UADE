@@ -1,0 +1,5 @@
+com\uade\e_commerce\model\Producto.class
+com\uade\e_commerce\service\ProductoService.class
+com\uade\e_commerce\ECommerceApplication.class
+com\uade\e_commerce\repository\ProductoRepository.class
+com\uade\e_commerce\controller\ProductoController.class
