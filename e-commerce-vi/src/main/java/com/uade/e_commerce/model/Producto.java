@@ -20,12 +20,13 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String nombre;
-    private String sexo;
-    private int talle;
-    private String descripcion;
+    private String nombre; //de la zapatilla
+    private String genero;
+    private String marca;
+    private String descripcion; // descripcion de producto
     private Double precio;
-    private String categoria;
-
+    private String color; 
+    private Categoria categoria;
+    // private imagenUrl; // TODO
     
 }
