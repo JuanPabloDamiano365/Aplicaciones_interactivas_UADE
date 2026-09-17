@@ -22,6 +22,4 @@ public class Carrito {
 
     private Usuario usuario;
 
-    // TODO - mas adelante hacer el carrito 
-    
 }

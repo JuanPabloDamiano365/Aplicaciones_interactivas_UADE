@@ -18,12 +18,6 @@ import com.uade.e_commerce.service.UsuarioService;
 
 import jakarta.validation.Valid;
 
-/**
- * Capa Controller de Usuario.
- *
- * El endpoint POST actúa como "registro" de un nuevo cliente de la
- * tienda: además de crear el Usuario, el Service le crea su Carrito vacío.
- */
 @RestController
 @RequestMapping("/api/usuarios")
 public class UsuarioController {
@@ -35,13 +29,13 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UsuarioDTO>> getAllUsuarios() {
-        return ResponseEntity.ok(usuarioService.getAllUsuarios());
+    public ResponseEntity<List<UsuarioDTO>> listarUsuarios() {
+        return ResponseEntity.ok(usuarioService.listarUsuarios());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioDTO> getUsuarioById(@PathVariable Long id) {
-        return ResponseEntity.ok(usuarioService.getUsuarioById(id));
+    public ResponseEntity<UsuarioDTO> buscarUsuarioPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(usuarioService.buscarUsuarioPorId(id));
     }
 
     @PostMapping

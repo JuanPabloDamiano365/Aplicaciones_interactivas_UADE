@@ -12,10 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-
-
-
-// http://localhost:8080/api/productos
 @RestController
 @RequestMapping("/api/productos")
 public class ProductoController {
@@ -25,30 +21,17 @@ public class ProductoController {
     ProductoController(ProductoService productoService) {
         this.productoService = productoService;
     }
-
-
-    // get http://localhost:8080/api/productos
     @GetMapping()
-    public List<Producto> getAllProductos() {
-        return productoService.getAllProductos();
+    public List<Producto> listarProductos() {
+        return productoService.listarProductos();
     }
-
-    //get http://localhost:8080/api/productos/1 
     @GetMapping("/{id}")
-    public Producto getProductoById(@PathVariable Long id) {
-        return productoService.getProductoById(id);
+    public Producto buscarProductoPorId(@PathVariable Long id) {
+        return productoService.buscarProductoPorId(id);
     }
-
-    //borra el producto 1 delete http://localhost:8080/api/productos/1 
     @DeleteMapping("/{id}")
-    public void deleteProducto(@PathVariable Long id) { 
+    public void deleteProducto(@PathVariable Long id) {
         productoService.deleteProducto(id);
     }
     }
-
-        // get http://localhost:8080/api/productos/sexo/hombre
-   // @GetMapping("/sexo/{sexo}")
-   // public Producto getProductoBySexo(@PathVariable String sexo) {
-     //   return (Producto) productoService.getProductoBySexo(sexo);
-    // }
 

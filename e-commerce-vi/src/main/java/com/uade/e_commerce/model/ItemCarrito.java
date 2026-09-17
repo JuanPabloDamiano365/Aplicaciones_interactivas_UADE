@@ -23,7 +23,7 @@ public class ItemCarrito {
     private Carrito carrito;
     private Producto producto;
     private int talle;
-    private int cantidad; 
+    private int cantidad;
 
-    
+
 }

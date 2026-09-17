@@ -6,12 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * DTO de request específico para el endpoint "agregar producto al
- * carrito". Es un DTO más chico y simple que ItemCarritoDTO porque acá
- * solo hacen falta los datos que el usuario elige (producto, talle,
- * cantidad); el resto (precio, subtotal) los calcula el Service.
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

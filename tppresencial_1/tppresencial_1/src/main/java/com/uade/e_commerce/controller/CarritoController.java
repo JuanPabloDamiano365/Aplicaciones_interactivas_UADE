@@ -15,13 +15,6 @@ import com.uade.e_commerce.service.CarritoService;
 
 import jakarta.validation.Valid;
 
-/**
- * Capa Controller de Carrito.
- *
- * El carrito no se identifica por su propio id en la URL sino por el id
- * del Usuario dueño (más natural para el consumidor de la API: "el
- * carrito del usuario X"), ya que la relación Usuario-Carrito es 1 a 1.
- */
 @RestController
 @RequestMapping("/api/usuarios/{usuarioId}/carrito")
 public class CarritoController {
@@ -34,10 +27,8 @@ public class CarritoController {
 
     @GetMapping
     public ResponseEntity<CarritoDTO> getCarrito(@PathVariable Long usuarioId) {
-        return ResponseEntity.ok(carritoService.getCarritoByUsuario(usuarioId));
+        return ResponseEntity.ok(carritoService.buscarCarritoPorUsuario(usuarioId));
     }
-
-    // Devuelve el carrito completo ya actualizado, para que el front-end no tenga que pedirlo aparte.
     @PostMapping("/items")
     public ResponseEntity<CarritoDTO> agregarItem(@PathVariable Long usuarioId,
                                                    @Valid @RequestBody AgregarItemCarritoDTO request) {

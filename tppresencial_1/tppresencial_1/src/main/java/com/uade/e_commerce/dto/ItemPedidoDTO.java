@@ -4,9 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * DTO de solo lectura para mostrar un ítem dentro de un PedidoDTO.
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,5 +15,5 @@ public class ItemPedidoDTO {
     private Integer talle;
     private Integer cantidad;
     private Double precioUnitario;
-    private Double subtotal; // precioUnitario * cantidad
+    private Double subtotal;
 }

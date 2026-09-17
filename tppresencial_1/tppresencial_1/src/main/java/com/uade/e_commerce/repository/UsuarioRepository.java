@@ -7,9 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.uade.e_commerce.model.Usuario;
 
-/**
- * Repositorio de Usuario.
- */
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 

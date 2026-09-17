@@ -19,12 +19,11 @@ public class ProductoService {
         this.productoRepository = productoRepository;
     }
 
-    public List<Producto> getAllProductos() {
-        // select * from productos
+    public List<Producto> listarProductos() {
         return productoRepository.findAll();
     }
 
-    public Producto getProductoById(Long id) {
+    public Producto buscarProductoPorId(Long id) {
         return productoRepository.findById(id).orElse(null);
     }
 
@@ -32,6 +31,6 @@ public class ProductoService {
         productoRepository.deleteById(id);
     }
 
-    
-    
+
+
 }

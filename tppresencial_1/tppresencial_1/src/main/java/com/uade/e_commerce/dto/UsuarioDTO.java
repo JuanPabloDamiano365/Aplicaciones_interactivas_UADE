@@ -6,12 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * DTO de Usuario. Se usa tanto para el registro (POST, donde se envía
- * "password" en texto plano) como para las respuestas (GET), en las que
- * el Service se encarga de vaciar el campo "password" antes de devolver
- * el DTO, para no exponer contraseñas por la API.
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

@@ -24,8 +24,8 @@ public class Pedido {
 
     private Usuario usuario;
     private LocalDateTime fecha;
-    private String estado; // pendiente, enviado, entregado, cancelado, etc
+    private String estado;
     private Double total;
 
-    
+
 }

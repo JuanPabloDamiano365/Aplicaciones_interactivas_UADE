@@ -18,13 +18,6 @@ import com.uade.e_commerce.service.PedidoService;
 
 import jakarta.validation.Valid;
 
-/**
- * Capa Controller de Pedido.
- *
- * Incluye el endpoint de checkout (POST /api/usuarios/{id}/pedidos), que
- * dispara la lógica de negocio de confirmar la compra a partir del
- * carrito actual del usuario.
- */
 @RestController
 @RequestMapping("/api")
 public class PedidoController {
@@ -36,18 +29,18 @@ public class PedidoController {
     }
 
     @GetMapping("/pedidos")
-    public ResponseEntity<List<PedidoDTO>> getAllPedidos() {
-        return ResponseEntity.ok(pedidoService.getAllPedidos());
+    public ResponseEntity<List<PedidoDTO>> listarPedidos() {
+        return ResponseEntity.ok(pedidoService.listarPedidos());
     }
 
     @GetMapping("/pedidos/{id}")
-    public ResponseEntity<PedidoDTO> getPedidoById(@PathVariable Long id) {
-        return ResponseEntity.ok(pedidoService.getPedidoById(id));
+    public ResponseEntity<PedidoDTO> buscarPedidoPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(pedidoService.buscarPedidoPorId(id));
     }
 
     @GetMapping("/usuarios/{usuarioId}/pedidos")
-    public ResponseEntity<List<PedidoDTO>> getPedidosByUsuario(@PathVariable Long usuarioId) {
-        return ResponseEntity.ok(pedidoService.getPedidosByUsuario(usuarioId));
+    public ResponseEntity<List<PedidoDTO>> listarPedidosPorUsuario(@PathVariable Long usuarioId) {
+        return ResponseEntity.ok(pedidoService.listarPedidosPorUsuario(usuarioId));
     }
 
     @PostMapping("/usuarios/{usuarioId}/pedidos")

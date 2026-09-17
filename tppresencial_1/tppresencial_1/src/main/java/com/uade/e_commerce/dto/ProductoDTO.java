@@ -8,16 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * DTO de Producto, usado en el body de las peticiones y en las respuestas
- * del ProductoController.
- *
- * En vez de exponer la entidad Producto (que trae el objeto Categoria
- * completo dentro), se expone solamente "categoriaId" (para crear/editar
- * el producto indicando a qué categoría pertenece) y "categoriaNombre"
- * (solo de lectura, para no tener que hacer una consulta aparte al mostrar
- * el nombre de la categoría de cada producto).
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -45,7 +35,7 @@ public class ProductoDTO {
     private String imagenUrl;
 
     @NotNull(message = "Debe indicarse la categoría del producto")
-    private Long categoriaId; // Se usa al crear/editar: a qué categoría pertenece
+    private Long categoriaId;
 
-    private String categoriaNombre; // Solo de lectura: nombre de la categoría (comodidad para el front-end)
+    private String categoriaNombre;
 }

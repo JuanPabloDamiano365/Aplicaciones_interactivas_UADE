@@ -18,19 +18,6 @@ import com.uade.e_commerce.service.CategoriaService;
 
 import jakarta.validation.Valid;
 
-/**
- * Capa Controller de Categoria.
- *
- * @RestController = @Controller + @ResponseBody: cada método devuelve
- * directamente datos (que Spring serializa a JSON), no una vista HTML.
- *
- * @RequestMapping("/api/categorias") define el prefijo común de todas las
- * rutas de este controller.
- *
- * Todos los métodos devuelven ResponseEntity<T>, lo que permite controlar
- * explícitamente el código de estado HTTP de la respuesta (200, 201, 204,
- * etc.), tal como pide la consigna.
- */
 @RestController
 @RequestMapping("/api/categorias")
 public class CategoriaController {
@@ -42,16 +29,14 @@ public class CategoriaController {
     }
 
     @GetMapping
-    public ResponseEntity<List<CategoriaDTO>> getAllCategorias() {
-        return ResponseEntity.ok(categoriaService.getAllCategorias());
+    public ResponseEntity<List<CategoriaDTO>> listarCategorias() {
+        return ResponseEntity.ok(categoriaService.listarCategorias());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CategoriaDTO> getCategoriaById(@PathVariable Long id) {
-        return ResponseEntity.ok(categoriaService.getCategoriaById(id));
+    public ResponseEntity<CategoriaDTO> buscarCategoriaPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(categoriaService.buscarCategoriaPorId(id));
     }
-
-    // @Valid dispara las validaciones definidas en CategoriaDTO (@NotBlank, etc.)
     @PostMapping
     public ResponseEntity<CategoriaDTO> crearCategoria(@Valid @RequestBody CategoriaDTO dto) {
         CategoriaDTO creada = categoriaService.crearCategoria(dto);

@@ -24,6 +24,6 @@ public class ItemPedido {
     private Producto producto;
     private int talle;
     private int cantidad;
-    private Double precioUnitario; 
+    private Double precioUnitario;
 
 }

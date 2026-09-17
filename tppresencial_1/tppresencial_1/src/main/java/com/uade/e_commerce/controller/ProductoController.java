@@ -18,14 +18,6 @@ import com.uade.e_commerce.service.ProductoService;
 
 import jakarta.validation.Valid;
 
-/**
- * Capa Controller de Producto.
- *
- * Expone el CRUD completo del catálogo de productos, más dos endpoints de
- * consulta adicionales (por categoría y por género) que son consultas muy
- * habituales en un e-commerce.
- */
-
 @RestController
 @RequestMapping("/api/productos")
 public class ProductoController {
@@ -37,23 +29,23 @@ public class ProductoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductoDTO>> getAllProductos() {
-        return ResponseEntity.ok(productoService.getAllProductos());
+    public ResponseEntity<List<ProductoDTO>> listarProductos() {
+        return ResponseEntity.ok(productoService.listarProductos());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductoDTO> getProductoById(@PathVariable Long id) {
-        return ResponseEntity.ok(productoService.getProductoById(id));
+    public ResponseEntity<ProductoDTO> buscarProductoPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(productoService.buscarProductoPorId(id));
     }
 
     @GetMapping("/categoria/{categoriaId}")
-    public ResponseEntity<List<ProductoDTO>> getProductosByCategoria(@PathVariable Long categoriaId) {
-        return ResponseEntity.ok(productoService.getProductosByCategoria(categoriaId));
+    public ResponseEntity<List<ProductoDTO>> listarProductosPorCategoria(@PathVariable Long categoriaId) {
+        return ResponseEntity.ok(productoService.listarProductosPorCategoria(categoriaId));
     }
 
     @GetMapping("/genero/{genero}")
-    public ResponseEntity<List<ProductoDTO>> getProductosByGenero(@PathVariable String genero) {
-        return ResponseEntity.ok(productoService.getProductosByGenero(genero));
+    public ResponseEntity<List<ProductoDTO>> listarProductosPorGenero(@PathVariable String genero) {
+        return ResponseEntity.ok(productoService.listarProductosPorGenero(genero));
     }
 
     @PostMapping

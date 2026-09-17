@@ -7,10 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * DTO de respuesta que representa un pedido ya confirmado, con sus items y
- * el total final.
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

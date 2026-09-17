@@ -13,12 +13,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * Entidad JPA que representa una línea/renglón dentro del Carrito: un
- * producto puntual, con un talle y una cantidad elegidos por el usuario.
- *
- * Se mapea a la tabla "itemcarrito".
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,17 +24,10 @@ public class ItemCarrito {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    /**
-     * Relación muchos-a-uno hacia Carrito (lado dueño: crea la columna FK
-     * "carrito_id"). Se ignora en el JSON de salida para no volver a
-     * serializar el carrito completo (Carrito -> items -> Carrito -> ...).
-     */
     @ManyToOne
     @JoinColumn(name = "carrito_id")
     @JsonIgnore
     private Carrito carrito;
-
-    // Relación muchos-a-uno hacia Producto: cada item referencia un único producto
     @ManyToOne
     @JoinColumn(name = "producto_id")
     private Producto producto;

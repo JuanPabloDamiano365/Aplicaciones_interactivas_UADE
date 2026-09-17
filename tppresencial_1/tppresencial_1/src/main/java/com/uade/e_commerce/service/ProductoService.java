@@ -12,22 +12,17 @@ import com.uade.e_commerce.model.Producto;
 import com.uade.e_commerce.repository.CategoriaRepository;
 import com.uade.e_commerce.repository.ProductoRepository;
 
-/**
- * Capa de Lógica de Negocio (Service) de Producto.
- */
 @Service
 @Transactional
 public class ProductoService {
 
     private final ProductoRepository productoRepository;
-    private final CategoriaRepository categoriaRepository; // Se necesita para validar/asociar la categoría del producto
+    private final CategoriaRepository categoriaRepository;
 
     public ProductoService(ProductoRepository productoRepository, CategoriaRepository categoriaRepository) {
         this.productoRepository = productoRepository;
         this.categoriaRepository = categoriaRepository;
     }
-
-    // Convierte la entidad Producto (con su relación a Categoria) en un ProductoDTO "aplanado"
     private ProductoDTO toDTO(Producto producto) {
         ProductoDTO dto = new ProductoDTO();
         dto.setId(producto.getId());
@@ -46,21 +41,17 @@ public class ProductoService {
         return dto;
     }
 
-    public List<ProductoDTO> getAllProductos() {
+    public List<ProductoDTO> listarProductos() {
         return productoRepository.findAll().stream()
                 .map(this::toDTO)
                 .toList();
     }
-
-    // Busca un producto por id; si no existe, 404
-    public ProductoDTO getProductoById(Long id) {
+    public ProductoDTO buscarProductoPorId(Long id) {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró el producto con id " + id));
         return toDTO(producto);
     }
-
-    // Lista los productos que pertenecen a una categoría puntual
-    public List<ProductoDTO> getProductosByCategoria(Long categoriaId) {
+    public List<ProductoDTO> listarProductosPorCategoria(Long categoriaId) {
         if (!categoriaRepository.existsById(categoriaId)) {
             throw new ResourceNotFoundException("No se encontró la categoría con id " + categoriaId);
         }
@@ -68,15 +59,11 @@ public class ProductoService {
                 .map(this::toDTO)
                 .toList();
     }
-
-    // Lista los productos filtrados por género ("Hombre", "Mujer", "Unisex")
-    public List<ProductoDTO> getProductosByGenero(String genero) {
+    public List<ProductoDTO> listarProductosPorGenero(String genero) {
         return productoRepository.findByGeneroIgnoreCase(genero).stream()
                 .map(this::toDTO)
                 .toList();
     }
-
-    // Crea un producto nuevo, validando que la categoría indicada exista
     public ProductoDTO crearProducto(ProductoDTO dto) {
         Categoria categoria = categoriaRepository.findById(dto.getCategoriaId())
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró la categoría con id " + dto.getCategoriaId()));
@@ -92,11 +79,9 @@ public class ProductoService {
         producto.setImagenUrl(dto.getImagenUrl());
         producto.setCategoria(categoria);
 
-        Producto guardado = productoRepository.save(producto); 
+        Producto guardado = productoRepository.save(producto);
         return toDTO(guardado);
     }
-
-    // Actualiza todos los datos editables de un producto existente
     public ProductoDTO actualizarProducto(Long id, ProductoDTO dto) {
         Producto producto = productoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró el producto con id " + id));
@@ -114,11 +99,9 @@ public class ProductoService {
         producto.setImagenUrl(dto.getImagenUrl());
         producto.setCategoria(categoria);
 
-        Producto actualizado = productoRepository.save(producto); 
+        Producto actualizado = productoRepository.save(producto);
         return toDTO(actualizado);
     }
-
-    // Elimina un producto por id
     public void eliminarProducto(Long id) {
         if (!productoRepository.existsById(id)) {
             throw new ResourceNotFoundException("No se encontró el producto con id " + id);

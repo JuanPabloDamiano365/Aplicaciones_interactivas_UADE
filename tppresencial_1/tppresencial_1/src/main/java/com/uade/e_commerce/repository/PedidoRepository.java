@@ -7,9 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.uade.e_commerce.model.Pedido;
 
-/**
- * Repositorio de Pedido.
- */
 @Repository
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
