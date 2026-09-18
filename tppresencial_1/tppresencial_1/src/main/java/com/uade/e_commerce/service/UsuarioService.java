@@ -3,6 +3,7 @@ package com.uade.e_commerce.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +11,7 @@ import com.uade.e_commerce.dto.UsuarioDTO;
 import com.uade.e_commerce.exception.BusinessException;
 import com.uade.e_commerce.exception.ResourceNotFoundException;
 import com.uade.e_commerce.model.Carrito;
+import com.uade.e_commerce.model.RolUsuario;
 import com.uade.e_commerce.model.Usuario;
 import com.uade.e_commerce.repository.CarritoRepository;
 import com.uade.e_commerce.repository.UsuarioRepository;
@@ -20,6 +22,7 @@ public class UsuarioService {
 
     private final UsuarioRepository usuarioRepository;
     private final CarritoRepository carritoRepository;
+    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public UsuarioService(UsuarioRepository usuarioRepository, CarritoRepository carritoRepository) {
         this.usuarioRepository = usuarioRepository;
@@ -31,6 +34,7 @@ public class UsuarioService {
         dto.setNombre(usuario.getNombre());
         dto.setEmail(usuario.getEmail());
         dto.setPassword(null);
+        dto.setRol(usuario.getRol() != null ? usuario.getRol() : RolUsuario.USUARIO);
         dto.setDireccion(usuario.getDireccion());
         dto.setTelefono(usuario.getTelefono());
         return dto;
@@ -54,7 +58,8 @@ public class UsuarioService {
         Usuario usuario = new Usuario();
         usuario.setNombre(dto.getNombre());
         usuario.setEmail(dto.getEmail());
-        usuario.setPassword(dto.getPassword());
+        usuario.setPassword(passwordEncoder.encode(dto.getPassword()));
+        usuario.setRol(dto.getRol() != null ? dto.getRol() : RolUsuario.USUARIO);
         usuario.setDireccion(dto.getDireccion());
         usuario.setTelefono(dto.getTelefono());
 

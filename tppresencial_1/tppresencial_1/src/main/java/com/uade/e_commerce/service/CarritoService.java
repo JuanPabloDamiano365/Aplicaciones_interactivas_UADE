@@ -51,16 +51,16 @@ public class CarritoService {
         Double total = items.stream().mapToDouble(ItemCarritoDTO::getSubtotal).sum();
         return new CarritoDTO(carrito.getId(), carrito.getUsuario().getId(), carrito.getFechaCreacion(), items, total);
     }
-    private Carrito buscarCarritoPorUsuario(Long usuarioId) {
+    private Carrito buscarCarritoPorUsuario1(Long usuarioId) {
         return carritoRepository.findByUsuarioId(usuarioId)
                 .orElseThrow(() -> new ResourceNotFoundException("El usuario con id " + usuarioId + " no tiene un carrito asociado"));
     }
     public CarritoDTO buscarCarritoPorUsuario(Long usuarioId) {
-        return toDTO(buscarCarritoPorUsuario(usuarioId));
+        return toDTO(buscarCarritoPorUsuario1(usuarioId));
     }
 
     public CarritoDTO agregarItem(Long usuarioId, AgregarItemCarritoDTO itemRequest) {
-        Carrito carrito = buscarCarritoPorUsuario(usuarioId);
+        Carrito carrito = buscarCarritoPorUsuario1(usuarioId);
 
         Producto producto = productoRepository.findById(itemRequest.getProductoId())
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró el producto con id " + itemRequest.getProductoId()));
@@ -88,7 +88,7 @@ public class CarritoService {
         return toDTO(carrito);
     }
     public CarritoDTO eliminarItem(Long usuarioId, Long itemId) {
-        Carrito carrito = buscarCarritoPorUsuario(usuarioId);
+        Carrito carrito = buscarCarritoPorUsuario1(usuarioId);
 
         ItemCarrito item = itemCarritoRepository.findById(itemId)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró el item de carrito con id " + itemId));
@@ -100,7 +100,7 @@ public class CarritoService {
         return toDTO(carrito);
     }
     public void vaciarCarrito(Long usuarioId) {
-        Carrito carrito = buscarCarritoPorUsuario(usuarioId);
+        Carrito carrito = buscarCarritoPorUsuario1(usuarioId);
         carrito.getItems().clear();
         carritoRepository.save(carrito);
     }

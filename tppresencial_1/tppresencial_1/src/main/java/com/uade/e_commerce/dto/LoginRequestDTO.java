@@ -1,7 +1,5 @@
 package com.uade.e_commerce.dto;
 
-import com.uade.e_commerce.model.RolUsuario;
-
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -11,12 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UsuarioDTO {
-
-    private Long id;
-
-    @NotBlank(message = "El nombre es obligatorio")
-    private String nombre;
+public class LoginRequestDTO {
 
     @NotBlank(message = "El email es obligatorio")
     @Email(message = "El email no tiene un formato válido")
@@ -24,9 +17,4 @@ public class UsuarioDTO {
 
     @NotBlank(message = "La contraseña es obligatoria")
     private String password;
-
-    private RolUsuario rol = RolUsuario.USUARIO;
-
-    private String direccion;
-    private String telefono;
 }

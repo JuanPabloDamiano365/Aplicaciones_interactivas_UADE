@@ -47,12 +47,25 @@ SELECT 'City Walk W', 'Mujer', 'Nike', 'Zapatilla urbana cómoda para uso diario
        (SELECT id FROM categoria WHERE nombre = 'Urbanas')
 WHERE NOT EXISTS (SELECT 1 FROM productos WHERE nombre = 'City Walk W');
 
--- Usuario de ejemplo, para poder probar el carrito y los pedidos sin registrar uno nuevo
-INSERT INTO usuarios (nombre, email, password, direccion, telefono)
-SELECT 'Usuario Demo', 'demo@tppresencial.com', '1234', 'Av. Siempre Viva 742', '11-5555-5555'
+-- Usuarios de ejemplo para probar los tres roles desde el inicio del programa
+INSERT INTO usuarios (nombre, email, password, rol, direccion, telefono)
+SELECT 'Usuario Demo', 'demo@tppresencial.com', '1234', 'USUARIO', 'Av. Siempre Viva 742', '11-5555-5555'
 WHERE NOT EXISTS (SELECT 1 FROM usuarios WHERE email = 'demo@tppresencial.com');
+
+INSERT INTO usuarios (nombre, email, password, rol, direccion, telefono)
+SELECT 'Vendedor Demo', 'vendedor@tppresencial.com', '1234', 'VENDEDOR', 'San Martín 456', '11-6666-6666'
+WHERE NOT EXISTS (SELECT 1 FROM usuarios WHERE email = 'vendedor@tppresencial.com');
+
+INSERT INTO usuarios (nombre, email, password, rol, direccion, telefono)
+SELECT 'Admin Demo', 'admin@tppresencial.com', '1234', 'ADMIN', 'Corrientes 789', '11-7777-7777'
+WHERE NOT EXISTS (SELECT 1 FROM usuarios WHERE email = 'admin@tppresencial.com');
 
 -- Carrito vacío asociado al usuario de ejemplo (relación 1 a 1 Usuario-Carrito)
 INSERT INTO carrito (usuario_id, fecha_creacion)
 SELECT (SELECT id FROM usuarios WHERE email = 'demo@tppresencial.com'), CURRENT_TIMESTAMP
 WHERE NOT EXISTS (SELECT 1 FROM carrito WHERE usuario_id = (SELECT id FROM usuarios WHERE email = 'demo@tppresencial.com'));
+
+-- Un carrito adicional para el vendedor de ejemplo si se quiere probar flujo vendedor
+INSERT INTO carrito (usuario_id, fecha_creacion)
+SELECT (SELECT id FROM usuarios WHERE email = 'vendedor@tppresencial.com'), CURRENT_TIMESTAMP
+WHERE NOT EXISTS (SELECT 1 FROM carrito WHERE usuario_id = (SELECT id FROM usuarios WHERE email = 'vendedor@tppresencial.com'));
